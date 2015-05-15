@@ -24,7 +24,7 @@ int		exec_client(t_serv clt)
 	{
 		buf[r] = '\0';
 		printf("receive %d bytes: [%s] \n", r, buf);
-		if (ft_strcmp("exit", buf))
+		if (ft_strcmp("quit", buf))
 			return (1);
 	}
 	return (0);
@@ -65,7 +65,7 @@ int		main(int argc, char **argv)
 	clt.port = atoi(argv[1]);
 	printf("port : %d \n", clt.port);
 	clt.sock = create_server(clt.port);
-	while ((clt.cs = accept(clt.sock, (struct sockaddr*)&clt.csin, &clt.cslen)))
+	while((clt.cs = accept(clt.sock, (struct sockaddr*)&clt.csin, &clt.cslen)))
 		if(new_client(clt) == -1)
 			break;
 	close(clt.sock);
