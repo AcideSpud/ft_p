@@ -22,12 +22,19 @@ int			create_client(char *addr, int port)
 int		main(int argc, char **argv)
 {
 	t_client	clt;
-
+	char		*line;
 	if (argc != 3)
 		usage_client(argv[0]);
 	clt.port = atoi(argv[2]);
 	printf("port : %d \n", clt.port);
 	clt.sock = create_client(argv[1], clt.port);
+	while(1)
+	{
+		ft_putstr("Plait-il ?>");
+		ft_get_next_line(0, &line);
+		write(sock, line, ft_strlen(line));
+		free(line);
+	}
 	write(clt.sock, "bonjour", 7);
 	close(clt.sock);
 	return (0);
