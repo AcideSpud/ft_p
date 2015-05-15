@@ -5,6 +5,7 @@
 # include <stdio.h>
 # include <sys/socket.h>
 # include <netdb.h>
+# include <signal.h>
 # include <netinet/in.h>
 # include <arpa/inet.h>
 # include "../libft/libft.h"
@@ -39,6 +40,7 @@ void					too_many_argument(char *str);
 **error_serveur.c
 */
 void					usage_serveur(char *str);
+void					close_socket(t_serv clt);
 /*
 **client.c
 */
@@ -47,6 +49,10 @@ int						create_client(char *addr, int port);
 **serveur.c
 */
 int						create_server(int port);
+/*
+**hub_serv.c
+ */
+void					hub_serv(char *str, t_serv clt);
 /*
 **hub_client.c
 */

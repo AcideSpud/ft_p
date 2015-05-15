@@ -3,6 +3,9 @@ SRC_PATH	= ./src/
 
 SRC_SERV	= serveur.c		\
 			  error_serv.c	\
+			  hub_serv.c	\
+			  tool.c		\
+
 
 SRC_CLIENT	= client.c		\
 			  error_client.c\
@@ -11,6 +14,7 @@ SRC_CLIENT	= client.c		\
 			  ls_client.c\
 			  cd_client.c\
 			  put_client.c\
+			  tool.c\
 			  pwd_quit_client.c\
 
 OBJ_PATH	= ./obj/

@@ -19,6 +19,11 @@ int			create_client(char *addr, int port)
 	return (clt.sock);
 }
 
+/*void	savage_quit(int fd)
+{
+	write(fd, "quit", 4);
+}*/
+
 int		main(int argc, char **argv)
 {
 	t_client	clt;
@@ -29,6 +34,7 @@ int		main(int argc, char **argv)
 	clt.port = atoi(argv[2]);
 	printf("port : %d \n", clt.port);
 	clt.sock = create_client(argv[1], clt.port);
+//	signal(SIGINT, savage_quit);
 	while(1)
 	{
 		ft_putstr("Plait-il ?>");

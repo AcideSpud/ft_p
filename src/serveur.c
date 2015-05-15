@@ -20,12 +20,13 @@ int		exec_client(t_serv clt)
 	char	buf[1024];
 
 	r = read(clt.cs, buf, 1023);
+	if (r == 0)
+		return (1);
 	if(r > 0)
 	{
 		buf[r] = '\0';
-		printf("receive %d bytes: [%s] \n", r, buf);
-		if (ft_strcmp("quit", buf) == 0)
-			return (1);
+		printf("receive %d bytes\n Message : %s \n", r, buf);
+		hub_serv(buf, clt);
 	}
 	return (0);
 }
@@ -35,24 +36,11 @@ int		new_client(t_serv	clt)
 	pid_t				p;
 
 	p = fork();
-	printf("New Client\n");
 	if (p)
-	{
-		printf("parent\n");
 		return (0);
-	}
 	else if (!p)
-	{
 		while(1)
-		{
-			if (exec_client(clt) == 1)
-			{
-				printf("Un client est mort\n");
-				close(clt.cs);
-				exit(1);
-			}
-		}
-	}
+			exec_client(clt);
 	return (0);
 }
 
