@@ -6,13 +6,14 @@
 #    By: tapostin <tapostin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/06 18:52:25 by tapostin          #+#    #+#              #
-#    Updated: 2015/05/06 18:52:28 by tapostin         ###   ########.fr        #
+#    Updated: 2015/05/15 14:35:11 by ajulien          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-SOURCES =	ft_memset.c		\
+SOURCES =	get_next_line.c\
+			ft_memset.c		\
 			ft_memdel.c		\
 			ft_bzero.c		\
 			ft_memcpy.c		\
@@ -71,7 +72,7 @@ SOURCES =	ft_memset.c		\
 			ft_lstadd.c		\
 			ft_lstiter.c	\
 			ft_putnbr_fd.c	\
-			ft_lstmap.c	
+			ft_lstmap.c
 
 
 HEADERS	= -I/

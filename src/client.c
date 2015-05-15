@@ -23,6 +23,7 @@ int		main(int argc, char **argv)
 {
 	t_client	clt;
 	char		*line;
+
 	if (argc != 3)
 		usage_client(argv[0]);
 	clt.port = atoi(argv[2]);
@@ -31,11 +32,10 @@ int		main(int argc, char **argv)
 	while(1)
 	{
 		ft_putstr("Plait-il ?>");
-		ft_get_next_line(0, &line);
-		write(sock, line, ft_strlen(line));
+		get_next_line(0, &line);
+		hub_client(line, clt);
 		free(line);
 	}
-	write(clt.sock, "bonjour", 7);
 	close(clt.sock);
 	return (0);
 }
