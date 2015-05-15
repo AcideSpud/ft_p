@@ -14,25 +14,60 @@ int		create_server(int	port)
 	return (clt.sock);
 }
 
+int		exec_client(t_serv clt)
+{
+	int		r;
+	char	buf[1024];
+
+	r = read(clt.cs, buf, 1023);
+	if(r > 0)
+	{
+		buf[r] = '\0';
+		printf("receive %d bytes: [%s] \n", r, buf);
+		if (ft_strcmp("exit", buf))
+			return (1);
+	}
+	return (0);
+}
+
+int		new_client(t_serv	clt)
+{
+	pid_t				p;
+
+	p = fork();
+	printf("New Client\n");
+	if (p)
+	{
+		printf("parent\n");
+		return (-1);
+	}
+	else if (!p)
+	{
+		while(1)
+		{
+			if (exec_client(clt) == 1)
+			{
+				printf("Un client est mort\n");
+				close(clt.cs);
+				return (-1);
+			}
+		}
+	}
+	return (0);
+}
+
 int		main(int argc, char **argv)
 {
-	char				buf[1024];
 	t_serv			clt;
-	int					r;
 
 	if (argc != 2)
 		usage_serveur(argv[0]);
 	clt.port = atoi(argv[1]);
 	printf("port : %d \n", clt.port);
 	clt.sock = create_server(clt.port);
-	clt.cs = accept(clt.sock, (struct sockaddr*)&clt.csin, &clt.cslen);
-	r = read(clt.cs, buf, 1023);
-	if (r > 0)
-	{
-		buf[r] = '\0';
-		printf("received %d bytes: [%s]\n", r, buf);
-	}
+	while ((clt.cs = accept(clt.sock, (struct sockaddr*)&clt.csin, &clt.cslen)))
+		if(new_client(clt) == -1)
+			break;
 	close(clt.sock);
-	close(clt.cs);
 	return (0);
 }
