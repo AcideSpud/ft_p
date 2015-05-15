@@ -25,3 +25,16 @@ int		tablen(char **abc)
 		i++;
 	return(i);
 }
+
+int		forkexecv(char *path, char **in)
+{
+	pid_t	id;
+	int		useless;
+
+	id = fork();
+	if (id == 0)
+		execv(path, in);
+	else
+		wait(&useless);
+	return (0);
+}
