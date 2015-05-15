@@ -24,7 +24,7 @@ int		exec_client(t_serv clt)
 	{
 		buf[r] = '\0';
 		printf("receive %d bytes: [%s] \n", r, buf);
-		if (ft_strcmp("quit", buf))
+		if (ft_strcmp("quit", buf) == 0)
 			return (1);
 	}
 	return (0);
@@ -39,7 +39,7 @@ int		new_client(t_serv	clt)
 	if (p)
 	{
 		printf("parent\n");
-		return (-1);
+		return (0);
 	}
 	else if (!p)
 	{
@@ -49,7 +49,7 @@ int		new_client(t_serv	clt)
 			{
 				printf("Un client est mort\n");
 				close(clt.cs);
-				return (-1);
+				exit(1);
 			}
 		}
 	}
@@ -65,9 +65,12 @@ int		main(int argc, char **argv)
 	clt.port = atoi(argv[1]);
 	printf("port : %d \n", clt.port);
 	clt.sock = create_server(clt.port);
-	while((clt.cs = accept(clt.sock, (struct sockaddr*)&clt.csin, &clt.cslen)))
-		if(new_client(clt) == -1)
-			break;
-	close(clt.sock);
+	while(1)
+	{
+		if((clt.cs = accept(clt.sock, (struct sockaddr*)&clt.csin, &clt.cslen)))
+			if(new_client(clt) == -1)
+				break;
+	}
+		close(clt.sock);
 	return (0);
 }
