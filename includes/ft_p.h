@@ -6,6 +6,8 @@
 # include <sys/socket.h>
 # include <netdb.h>
 # include <signal.h>
+# include <sys/wait.h>
+# include <sys/types.h>
 # include <netinet/in.h>
 # include <arpa/inet.h>
 # include "../libft/libft.h"
