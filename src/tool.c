@@ -51,7 +51,13 @@ int		forkexecv(char *path, char **in)
 
 	id = fork();
 	if (id == 0)
-		execv(path, in);
+	{
+		if (execv(path, in) == -1)
+		{
+			ft_putstr("sboub");
+				exit(0);
+		}
+	}
 	else
 		wait(&useless);
 	return (0);

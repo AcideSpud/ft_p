@@ -20,9 +20,9 @@ void	hub_serv(char *str, t_serv clt)
 	if (ft_strcmp(tabcmd[0], "quit") == 0)
 		close_socket(clt);
 	if (ft_strcmp(tabcmd[0], "cd") == 0)
-		return;
+		serv_cd(tabcmd, clt);
 	if (ft_strcmp(tabcmd[0], "ls") == 0)
-		return;
+		serv_ls(tabcmd, clt);
 	if (ft_strcmp(tabcmd[0], "pwd") == 0)
 		pwd_serv(clt);
 	if (ft_strcmp(tabcmd[0], "put") == 0)

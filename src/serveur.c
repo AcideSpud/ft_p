@@ -53,12 +53,13 @@ int		main(int argc, char **argv)
 	clt.port = atoi(argv[1]);
 	printf("port : %d \n", clt.port);
 	clt.sock = create_server(clt.port);
+	clt.home = getcwd(NULL, 0);
 	while(1)
 	{
 		if((clt.cs = accept(clt.sock, (struct sockaddr*)&clt.csin, &clt.cslen)))
 			if(new_client(clt) == -1)
 				break;
 	}
-		close(clt.sock);
+	close(clt.sock);
 	return (0);
 }
