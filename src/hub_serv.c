@@ -26,7 +26,7 @@ void	hub_serv(char *str, t_serv clt)
 	if (ft_strcmp(tabcmd[0], "pwd") == 0)
 		pwd_serv(clt);
 	if (ft_strcmp(tabcmd[0], "put") == 0)
-		return;
+		put_serv(tabcmd[1], clt);
 	if (ft_strcmp(tabcmd[0], "get") == 0)
 		return;
 	freetab(tabcmd);

@@ -10,6 +10,8 @@
 # include <sys/types.h>
 # include <netinet/in.h>
 # include <arpa/inet.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include "../libft/libft.h"
 
 typedef struct			s_serv
@@ -83,4 +85,5 @@ void					put_hub(char **tab, t_client clt);
 */
 void					get_hub(char **tab, t_client clt);
 
+char					*ft_itoa(int n);
 #endif
