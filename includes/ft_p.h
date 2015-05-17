@@ -21,6 +21,7 @@ typedef struct			s_serv
 	struct sockaddr_in	csin;
 	struct protoent		*proto;
 	struct sockaddr_in	sin;
+	char				*home;
 }						t_serv;
 
 typedef	struct			s_client
@@ -59,8 +60,12 @@ void					hub_serv(char *str, t_serv clt);
 **hub_client.c
 */
 void					hub_client(char *, t_client clt);
+/*
+**tool.c
+*/
 void					freetab(char **abc);
 int						tablen(char **abc);
+int						forkexecv(char *path, char **in);
 /*
 **pwd_quit_client.c
 */
@@ -69,11 +74,11 @@ void					pwd_hub(char **tab, t_client clt);
 /*
 **cd_client.c
 */
-void					cd_hub(char **tab, t_client clt);
+void					cd_hub(char **tab, char *str, t_client clt);
 /*
 **ls_client.c
 */
-void					ls_hub(char **tab, t_client clt);
+void					ls_hub(char **tab, char *str, t_client clt);
 /*
 **put_client.c
 */
@@ -82,5 +87,9 @@ void					put_hub(char **tab, t_client clt);
 **get_client.c
 */
 void					get_hub(char **tab, t_client clt);
-
+/*
+**ls_cd_serv.c
+*/
+void					serv_ls(char **tab, t_serv clt);
+void					serv_cd(char **tab, t_serv clt);
 #endif
