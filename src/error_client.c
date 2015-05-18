@@ -8,10 +8,5 @@ void	usage_client(char *str)
 
 void	parse_error(char *str)
 {
-	printf("%s : Command not found. \n", str);
-}
-
-void	too_many_argument(char *str)
-{
-	printf("%s : Too many arguments. \n", str);
+	printf("ERROR : [%s] command not found. \n", str);
 }

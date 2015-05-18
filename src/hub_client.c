@@ -6,13 +6,13 @@ void	hub_client(char *str, t_client clt)
 
 	tabcmd = ft_strsplit(str, ' ');
 	if (ft_strcmp(tabcmd[0], "quit") == 0)
-		quit_hub(tabcmd, clt);
+		quit_hub(str, clt);
 	else if (ft_strcmp(tabcmd[0], "cd") == 0)
-		cd_hub(tabcmd, str, clt);
+		cd_hub(str, clt);
 	else if (ft_strcmp(tabcmd[0], "ls") == 0)
-		ls_hub(tabcmd, str, clt);
+		ls_hub(str, clt);
 	else if (ft_strcmp(tabcmd[0], "pwd") == 0)
-		pwd_hub(tabcmd, clt);
+		pwd_hub(str, clt);
 	else if (ft_strcmp(tabcmd[0], "put") == 0)
 		put_hub(tabcmd, clt);
 	else if (ft_strcmp(tabcmd[0], "get") == 0)

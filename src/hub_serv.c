@@ -1,15 +1,37 @@
 #include <ft_p.h>
 
-void	pwd_serv(t_serv clt)
+void	pwd_serv(char ** tab, t_serv clt)
 {
 	char	*pwd;
-	(void)clt;
 
-	pwd = getcwd(NULL, 0);
-	write(clt.cs, pwd, ft_strlen(pwd));
-	free(pwd);
-	pwd = NULL;
-	return;
+	if (tablen(tab) != 1)
+	{
+		write(clt.cs,
+		"ERROR : Only pwd without argument is supported by the serveur.\n", 62);
+		return ;
+	}
+	else
+	{
+		pwd = getcwd(NULL, 0);
+		write(clt.cs, pwd, ft_strlen(pwd));
+		free(pwd);
+		pwd = NULL;
+		return ;
+	}
+}
+
+int		check_quit(char **tab, t_serv clt)
+{
+	if (tablen(tab) == 1)
+	{
+		write(clt.cs, "SUCCES\n", 7);
+		return (0);
+	}
+	else
+	{
+		write(clt.cs, "ERROR : quit doesn't take any argument.\n", 40);
+		return (-1);
+	}
 }
 
 void	hub_serv(char *str, t_serv clt)
@@ -18,16 +40,21 @@ void	hub_serv(char *str, t_serv clt)
 
 	tabcmd = ft_strsplit(str, ' ');
 	if (ft_strcmp(tabcmd[0], "quit") == 0)
-		close_socket(clt);
-	if (ft_strcmp(tabcmd[0], "cd") == 0)
+	{
+		if (check_quit(tabcmd, clt) == 0)
+			close_socket(clt);
+	}
+	else if (ft_strcmp(tabcmd[0], "cd") == 0)
 		serv_cd(tabcmd, clt);
-	if (ft_strcmp(tabcmd[0], "ls") == 0)
+	else if (ft_strcmp(tabcmd[0], "ls") == 0)
 		serv_ls(tabcmd, clt);
-	if (ft_strcmp(tabcmd[0], "pwd") == 0)
-		pwd_serv(clt);
-	if (ft_strcmp(tabcmd[0], "put") == 0)
+	else if (ft_strcmp(tabcmd[0], "pwd") == 0)
+		pwd_serv(tabcmd, clt);
+	else if (ft_strcmp(tabcmd[0], "put") == 0)
 		return;
-	if (ft_strcmp(tabcmd[0], "get") == 0)
+	else if (ft_strcmp(tabcmd[0], "get") == 0)
 		return;
+	else
+		write(clt.cs, "Command unknown to serveur.\n", 28);
 	freetab(tabcmd);
 }

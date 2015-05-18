@@ -10,13 +10,11 @@ SRC_SERV	= serveur.c		\
 
 SRC_CLIENT	= client.c		\
 			  error_client.c\
-			  get_client.c\
-			  hub_client.c\
-			  ls_client.c\
-			  cd_client.c\
-			  put_client.c\
-			  tool.c\
-			  pwd_quit_client.c\
+			  get_client.c	\
+			  put_client.c	\
+			  hub_client.c	\
+			  tool.c		\
+			  pwd_quit_cd_ls_client.c\
 
 OBJ_PATH	= ./obj/
 INC_PATH	= ./includes/
