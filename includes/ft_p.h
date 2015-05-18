@@ -67,7 +67,6 @@ void					hub_client(char *, t_client clt);
 */
 void					freetab(char **abc);
 int						tablen(char **abc);
-int						forkexecv(char *path, char **in);
 /*
 **pwd_quit_client.c
 */

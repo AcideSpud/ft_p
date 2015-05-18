@@ -7,12 +7,13 @@ void	pwd_serv(char ** tab, t_serv clt)
 	if (tablen(tab) != 1)
 	{
 		write(clt.cs,
-		"ERROR : Only pwd without argument is supported by the serveur.\n", 62);
+		"ERROR : Only pwd without argument is supported by the serveur.\n", 63);
 		return ;
 	}
 	else
 	{
 		pwd = getcwd(NULL, 0);
+		pwd = ft_strjoin(pwd, "\n");
 		write(clt.cs, pwd, ft_strlen(pwd));
 		free(pwd);
 		pwd = NULL;
@@ -38,6 +39,8 @@ void	hub_serv(char *str, t_serv clt)
 {
 	char	**tabcmd;
 
+	if (str[ft_strlen(str) - 1] == '\n')
+		str[ft_strlen(str) - 1] = '\0';
 	tabcmd = ft_strsplit(str, ' ');
 	if (ft_strcmp(tabcmd[0], "quit") == 0)
 	{
