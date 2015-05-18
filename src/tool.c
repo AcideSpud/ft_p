@@ -26,7 +26,7 @@ int		tablen(char **abc)
 	return(i);
 }
 
-char *ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	char *s;
 
@@ -42,23 +42,4 @@ char *ft_itoa(int n)
 		break;
 	}
 	return (s);
-}
-
-int		forkexecv(char *path, char **in)
-{
-	pid_t	id;
-	int		useless;
-
-	id = fork();
-	if (id == 0)
-	{
-		if (execv(path, in) == -1)
-		{
-			ft_putstr("sboub");
-				exit(0);
-		}
-	}
-	else
-		wait(&useless);
-	return (0);
 }

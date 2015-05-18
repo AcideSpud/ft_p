@@ -12,17 +12,26 @@ int		check_ls(char **tab)
 	else
 		return (0);
 }
+
 void	serv_ls(char **tab, t_serv clt)
 {
-	 if (check_ls(tab) == -1)
+	pid_t	id;
+
+	if (check_ls(tab) == -1)
 	{
 		write(clt.cs,
-			"ERROR : Only ls and ls -l are supportedby the serveur.\n", 56);
+			"ERROR : Only ls and ls -l are supported by the serveur.\n", 57);
 	}
 	else
 	{
-		dup2(clt.cs, 1);
-		forkexecv("/bin/ls", tab);
+		id = fork();
+		if (id == 0)
+		{
+			dup2(clt.cs, 1);
+			execv("/bin/ls", tab);
+		}
+		else
+			wait4(id, 0, 0, 0);
 	}
 	return ;
 }
