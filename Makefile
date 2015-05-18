@@ -6,6 +6,7 @@ SRC_SERV	= serveur.c		\
 			  hub_serv.c	\
 			  ls_cd_serv.c	\
 			  tool.c		\
+			  put_serv.c	\
 
 
 SRC_CLIENT	= client.c		\
@@ -43,12 +44,12 @@ all: $(SERVEUR) $(CLIENT)
 
 $(SERVEUR)	: $(OBJ_S)
 	@make -C $(LIB_PATH)
-	@$(CC) $(CFLAGS)  $(LIB) -o $(SERVEUR) $(OBJ_S)
+	@$(CC) $(CFLAGS) -o $(SERVEUR) $(OBJ_S) -L -lft $(LIB)
 	@echo "$(SERVEUR) : executable file compiled successfully"
 
 $(CLIENT)	:	$(OBJ_C)
 	@make -C $(LIB_PATH)
-	@$(CC) $(CFLAGS) $(LIB) -o $(CLIENT) $(OBJ_C)
+	@$(CC) $(CFLAGS) -o $(CLIENT) $(OBJ_C) -L -lft $(LIB) 
 	@echo "$(CLIENT) : executable file compiled successfully"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INC)

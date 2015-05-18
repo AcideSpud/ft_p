@@ -3,7 +3,7 @@
 int		get_fsize(t_serv clt)
 {
 	int		r;
-	char	*buf[1024];
+	char	buf[1024];
 	int		size;
 
 	r = read(clt.cs, buf, 1023);
@@ -12,27 +12,21 @@ int		get_fsize(t_serv clt)
 	if (r > 0)
 	{
 		buf[r] = '\0';
-		size = ft_atoi((char *)buf);
+		size = ft_atoi(buf);
 	}
 	return (size);
 }
 
-char	*get_fdata(t_serv clt, int size)
+void	get_fdata(t_serv clt, int size, int fd)
 {
 	int		r;
-	char	*buf[size + 1];
-	char	*str;
+	char	buf[size];
 
 	r = read(clt.cs, buf, size);
-	if (r == 0)
-		return (NULL);
 	if (r > 0)
 	{
-		buf[r] = '\0';
-		str = ft_strdup((char *)buf);
+		write(fd, buf, size);
 	}
-	return (str);
-
 }
 
 void	error_put(t_serv clt)
@@ -43,18 +37,18 @@ void	error_put(t_serv clt)
 void	put_serv(char *str, t_serv clt)
 {
 	unsigned int	size;
-	char 			*data;
 	int				fd;
 
+	(void)str;
+	printf("reception de fichier \n");
 	write(clt.cs, "ok", 2);
 	size = get_fsize(clt);
+	fd = open("camarche", O_CREAT|O_RDWR, 0777);
 	if (size == 0)
 	{
 		error_put(clt);
 		return ;
 	}
-	data = get_fdata(clt, size);
-	fd = open(str, O_CREAT|O_RDWR, 0777);
-	write(fd, data, size);
-	write(clt.cs, "recu", 4);
+	get_fdata(clt, size, fd);
+	printf("Done\n");
 }
