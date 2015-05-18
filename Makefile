@@ -6,6 +6,7 @@ SRC_SERV	= serveur.c		\
 			  hub_serv.c	\
 			  ls_cd_serv.c	\
 			  tool.c		\
+			  put_serv.c	\
 
 
 SRC_CLIENT	= client.c		\

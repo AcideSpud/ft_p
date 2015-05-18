@@ -10,6 +10,9 @@
 # include <sys/types.h>
 # include <netinet/in.h>
 # include <arpa/inet.h>
+# include <sys/mman.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include "../libft/libft.h"
 
 typedef struct			s_serv
@@ -80,9 +83,17 @@ void					put_hub(char **tab, t_client clt);
 **get_client.c
 */
 void					get_hub(char **tab, t_client clt);
+
+/*
+ **put_serv.c
+ */
+void					put_serv(char *str, t_serv clt);
+
+char					*ft_itoa(int n);
 /*
 **ls_cd_serv.c
 */
 void					serv_ls(char **tab, t_serv clt);
 void					serv_cd(char **tab, t_serv clt);
+
 #endif
