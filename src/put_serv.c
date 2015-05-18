@@ -7,13 +7,13 @@ int		get_fsize(t_serv clt)
 	int		size;
 
 	r = read(clt.cs, buf, 1023);
-	if (r == 0)
-		return (0);
 	if (r > 0)
 	{
 		buf[r] = '\0';
 		size = ft_atoi(buf);
 	}
+	else
+		size = 0;
 	return (size);
 }
 

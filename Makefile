@@ -44,12 +44,12 @@ all: $(SERVEUR) $(CLIENT)
 
 $(SERVEUR)	: $(OBJ_S)
 	@make -C $(LIB_PATH)
-	@$(CC) $(CFLAGS) -o $(SERVEUR) $(OBJ_S) -L -lft $(LIB)
+	@$(CC) $(CFLAGS) -o $(SERVEUR) $(OBJ_S) 
 	@echo "$(SERVEUR) : executable file compiled successfully"
 
 $(CLIENT)	:	$(OBJ_C)
 	@make -C $(LIB_PATH)
-	@$(CC) $(CFLAGS) -o $(CLIENT) $(OBJ_C) -L -lft $(LIB) 
+	@$(CC) $(CFLAGS) -o $(CLIENT) $(OBJ_C) 
 	@echo "$(CLIENT) : executable file compiled successfully"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INC)

@@ -16,7 +16,7 @@ char*		get_ssize(char **tab)
 	struct	stat	s;
 	int				size;
 	int				fd;
-	char*			it;
+	char			*it;
 
 	if ((fd = open(tab[1], O_RDONLY)) == -1)
 	{
@@ -57,10 +57,11 @@ void	put_hub(char **tab, t_client clt)
 	buf[r] = '\0';
 	if (ft_strcmp(buf, "ok") == 0)
 		size = get_ssize(tab);
+	else
+		size = ft_itoa(-1);
 	if (ft_strcmp(size ,"-1") != 0)
 	{
 		write(clt.sock, size, ft_strlen(size));
 		send_data(clt, tab);
 	}
-	return;
 }
