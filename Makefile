@@ -11,13 +11,11 @@ SRC_SERV	= serveur.c		\
 
 SRC_CLIENT	= client.c		\
 			  error_client.c\
-			  get_client.c\
-			  hub_client.c\
-			  ls_client.c\
-			  cd_client.c\
-			  put_client.c\
-			  tool.c\
-			  pwd_quit_client.c\
+			  get_client.c	\
+			  put_client.c	\
+			  hub_client.c	\
+			  tool.c		\
+			  pwd_quit_cd_ls_client.c\
 
 OBJ_PATH	= ./obj/
 INC_PATH	= ./includes/
@@ -44,12 +42,12 @@ all: $(SERVEUR) $(CLIENT)
 
 $(SERVEUR)	: $(OBJ_S)
 	@make -C $(LIB_PATH)
-	@$(CC) $(CFLAGS) -o $(SERVEUR) $(OBJ_S) 
+	@$(CC) $(CFLAGS)  $(LIB) -o $(SERVEUR) $(OBJ_S)
 	@echo "$(SERVEUR) : executable file compiled successfully"
 
 $(CLIENT)	:	$(OBJ_C)
 	@make -C $(LIB_PATH)
-	@$(CC) $(CFLAGS) -o $(CLIENT) $(OBJ_C) 
+	@$(CC) $(CFLAGS) $(LIB) -o $(CLIENT) $(OBJ_C)
 	@echo "$(CLIENT) : executable file compiled successfully"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INC)

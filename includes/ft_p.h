@@ -40,8 +40,6 @@ typedef	struct			s_client
 */
 void					usage_client(char *str);
 void					parse_error(char *str);
-void					too_many_argument(char *str);
-
 /*
 **error_serveur.c
 */
@@ -59,6 +57,7 @@ int						create_server(int port);
 **hub_serv.c
  */
 void					hub_serv(char *str, t_serv clt);
+void					pwd_serv(char ** tab, t_serv clt);
 /*
 **hub_client.c
 */
@@ -72,16 +71,10 @@ int						forkexecv(char *path, char **in);
 /*
 **pwd_quit_client.c
 */
-void					quit_hub(char **tab, t_client clt);
-void					pwd_hub(char **tab, t_client clt);
-/*
-**cd_client.c
-*/
-void					cd_hub(char **tab, char *str, t_client clt);
-/*
-**ls_client.c
-*/
-void					ls_hub(char **tab, char *str, t_client clt);
+void					quit_hub(char *str, t_client clt);
+void					pwd_hub(char *str, t_client clt);
+void					cd_hub(char *str, t_client clt);
+void					ls_hub(char *str, t_client clt);
 /*
 **put_client.c
 */
