@@ -20,9 +20,8 @@ char*		get_ssize(char **tab)
 
 	if ((fd = open(tab[1], O_RDONLY)) == -1)
 	{
-		printf("erreur fichier non lisible\n");
-		it = ft_itoa(-1);
-		return (it);
+		printf("ERROR : file cannot be accessed !\n");
+		return ("-1");
 	}
 	fstat(fd, &s);
 	size = s.st_size;
@@ -47,21 +46,13 @@ void	send_data(t_client clt, char **tab)
 void	put_hub(char **tab, t_client clt)
 {
 	char	*st;
-	char	buf[1024];
-	int		r;
 	char	*size;
 
 	st = join_string(tab);
 	write(clt.sock, st, ft_strlen(st));
-	r = read(clt.sock, buf, 1023);
-	buf[r] = '\0';
-	if (ft_strcmp(buf, "ok") == 0)
-		size = get_ssize(tab);
-	else
-		size = ft_itoa(-1);
-	if (ft_strcmp(size ,"-1") != 0)
-	{
-		write(clt.sock, size, ft_strlen(size));
+	size = get_ssize(tab);
+	printf("%s\n", size);
+	write(clt.sock, size, ft_strlen(size));
+	if (ft_strcmp(size, "-1") != 0)
 		send_data(clt, tab);
-	}
 }
