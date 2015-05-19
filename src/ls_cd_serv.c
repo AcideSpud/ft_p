@@ -6,6 +6,10 @@ int		check_ls(char **tab)
 	{
 		if (ft_strcmp(tab[1], "-l") == 0)
 			return (0);
+		if (ft_strcmp(tab[1], "-a") == 0)
+			return (0);
+		if (ft_strcmp(tab[1], "-la") == 0)
+			return (0);
 		else
 			return (-1);
 	}
@@ -20,7 +24,7 @@ void	serv_ls(char **tab, t_serv clt)
 	if (check_ls(tab) == -1)
 	{
 		write(clt.cs,
-			"ERROR : Only ls and ls -l are supported by the serveur.\n", 57);
+			"ERROR : Only ls and ls -la are supported by the serveur.\n", 57);
 	}
 	else
 	{
@@ -63,7 +67,7 @@ void	serv_cd(char **tab, t_serv clt)
 		write(clt.cs, "SUCCES\n", 7);
 	}
 	else if (tablen(tab) > 2)
-		write(clt.cs, "ERROR : Too many arguments for cd.\n" , 35);
+		write(clt.cs, "ERROR : Too many arguments for cd.\n", 35);
 	else
 	{
 		str1 = getcwd(NULL, 0);

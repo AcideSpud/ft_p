@@ -1,11 +1,11 @@
 #include <ft_p.h>
 
-int			create_client(char *addr, int port)
+int		create_client(char *addr, int port)
 {
 	t_client	clt;
 
-	if(!(clt.proto = getprotobyname("tcp")))
-			return (-1);
+	if (!(clt.proto = getprotobyname("tcp")))
+		return (-1);
 	clt.sock = socket(PF_INET, SOCK_STREAM, clt.proto->p_proto);
 	clt.sin.sin_family = AF_INET;
 	clt.sin.sin_port = htons(port);
@@ -19,11 +19,6 @@ int			create_client(char *addr, int port)
 	return (clt.sock);
 }
 
-/*void	savage_quit(int fd)
-{
-	write(fd, "quit", 4);
-}*/
-
 int		main(int argc, char **argv)
 {
 	t_client	clt;
@@ -33,14 +28,17 @@ int		main(int argc, char **argv)
 		usage_client(argv[0]);
 	clt.port = atoi(argv[2]);
 	printf("port : %d \n", clt.port);
-	clt.sock = create_client(argv[1], clt.port);
-//	signal(SIGINT, savage_quit);
-	while(1)
+	if (ft_strcmp(argv[1], "localhost") == 0)
+		clt.sock = create_client("127.0.0.1", clt.port);
+	else
+		clt.sock = create_client(argv[1], clt.port);
+	while (1)
 	{
 		ft_putstr("Plait-il ?>");
 		get_next_line(0, &line);
 		hub_client(line, clt);
 		free(line);
+		line = NULL;
 	}
 	close(clt.sock);
 	return (0);

@@ -1,6 +1,6 @@
 #include <ft_p.h>
 
-void	pwd_serv(char ** tab, t_serv clt)
+void	pwd_serv(char **tab, t_serv clt)
 {
 	char	*pwd;
 
@@ -13,8 +13,8 @@ void	pwd_serv(char ** tab, t_serv clt)
 	else
 	{
 		pwd = getcwd(NULL, 0);
-		pwd = ft_strjoin(pwd, "\n");
 		write(clt.cs, pwd, ft_strlen(pwd));
+		write(clt.cs, "\n", 1);
 		free(pwd);
 		pwd = NULL;
 		return ;
