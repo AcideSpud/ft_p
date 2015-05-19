@@ -24,6 +24,11 @@ char*		get_ssize(char **tab)
 		return ("-1");
 	}
 	fstat(fd, &s);
+	if (!(S_ISREG(s.st_mode)))
+	{
+		printf("ERROR : file cannot be accessed !\n");
+		return ("-1");
+	}
 	size = s.st_size;
 	it = ft_itoa(size);
 	return (it);

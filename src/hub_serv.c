@@ -56,7 +56,7 @@ void	hub_serv(char *str, t_serv clt)
 	else if (ft_strcmp(tabcmd[0], "put") == 0)
 		put_serv(tabcmd[1], clt);
 	else if (ft_strcmp(tabcmd[0], "get") == 0)
-		return;
+		get_serv(tabcmd[1], clt);
 	else
 		write(clt.cs, "Command unknown to serveur.\n", 28);
 	freetab(tabcmd);
