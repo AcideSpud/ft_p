@@ -4,6 +4,8 @@ void	hub_client(char *str, t_client clt)
 {
 	char	**tabcmd;
 
+	if (strlen(str) < 2)
+		return ;
 	tabcmd = ft_strsplit(str, ' ');
 	if (ft_strcmp(tabcmd[0], "quit") == 0)
 		quit_hub(str, clt);

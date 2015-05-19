@@ -1,6 +1,6 @@
 #include <ft_p.h>
 
-void		freetab(char **abc)
+void	freetab(char **abc)
 {
 	int		i;
 
@@ -14,6 +14,7 @@ void		freetab(char **abc)
 	free(abc[i]);
 	abc[i] = NULL;
 	free(abc);
+	abc = NULL;
 }
 
 int		tablen(char **abc)
@@ -23,7 +24,7 @@ int		tablen(char **abc)
 	i = 0;
 	while (abc[i] != NULL)
 		i++;
-	return(i);
+	return (i);
 }
 
 char	*ft_itoa(int n)
@@ -39,7 +40,7 @@ char	*ft_itoa(int n)
 		*s = n % 10 + '0';
 		n = n / 10;
 		if (!n)
-		break;
+			break ;
 	}
 	return (s);
 }

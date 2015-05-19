@@ -1,6 +1,6 @@
 #include <ft_p.h>
 
-void	pwd_serv(char ** tab, t_serv clt)
+void	pwd_serv(char **tab, t_serv clt)
 {
 	char	*pwd;
 
@@ -13,8 +13,8 @@ void	pwd_serv(char ** tab, t_serv clt)
 	else
 	{
 		pwd = getcwd(NULL, 0);
-		pwd = ft_strjoin(pwd, "\n");
 		write(clt.cs, pwd, ft_strlen(pwd));
+		write(clt.cs, "\n", 1);
 		free(pwd);
 		pwd = NULL;
 		return ;
@@ -56,7 +56,7 @@ void	hub_serv(char *str, t_serv clt)
 	else if (ft_strcmp(tabcmd[0], "put") == 0)
 		put_serv(tabcmd[1], clt);
 	else if (ft_strcmp(tabcmd[0], "get") == 0)
-		return;
+		return ;
 	else
 		write(clt.cs, "Command unknown to serveur.\n", 28);
 	freetab(tabcmd);
