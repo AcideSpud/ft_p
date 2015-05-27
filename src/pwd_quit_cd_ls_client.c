@@ -6,14 +6,9 @@ void	pwd_hub(char *str, t_client clt)
 	char	buf[1024];
 
 	write(clt.sock, str, ft_strlen(str));
-	while (1)
-	{
-		r = read(clt.sock, buf, 1023);
-		buf[r] = '\0';
-		ft_putstr(buf);
-		if (buf[0] == '\n')
-			break ;
-	}
+	r = read(clt.sock, buf, 1023);
+	buf[r] = '\0';
+	ft_putstr(buf);
 	return ;
 }
 

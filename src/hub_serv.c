@@ -3,6 +3,7 @@
 void	pwd_serv(char **tab, t_serv clt)
 {
 	char	*pwd;
+	char	*ret;
 
 	if (tablen(tab) != 1)
 	{
@@ -13,40 +14,38 @@ void	pwd_serv(char **tab, t_serv clt)
 	else
 	{
 		pwd = getcwd(NULL, 0);
-		write(clt.cs, pwd, ft_strlen(pwd));
-		write(clt.cs, "\n", 1);
-		free(pwd);
-		pwd = NULL;
+		ret = ft_strjoin(pwd, "\n");
+		write(clt.cs, ret, ft_strlen(ret));
+		// free(pwd);
+		// pwd = NULL;
+		// free(ret);
+		// ret = NULL;
 		return ;
 	}
 }
 
-int		check_quit(char **tab, t_serv clt)
+void	check_quit(char **tab, t_serv clt)
 {
 	if (tablen(tab) == 1)
 	{
 		write(clt.cs, "SUCCES\n", 7);
-		return (0);
+		close_socket(clt);
 	}
 	else
-	{
 		write(clt.cs, "ERROR : quit doesn't take any argument.\n", 40);
-		return (-1);
-	}
 }
 
 void	hub_serv(char *str, t_serv clt)
 {
 	char	**tabcmd;
 
+	if (strlen(str) < 2)
+		return ;
 	if (str[ft_strlen(str) - 1] == '\n')
 		str[ft_strlen(str) - 1] = '\0';
 	tabcmd = ft_strsplit(str, ' ');
 	if (ft_strcmp(tabcmd[0], "quit") == 0)
-	{
-		if (check_quit(tabcmd, clt) == 0)
-			close_socket(clt);
-	}
+		check_quit(tabcmd, clt);
 	else if (ft_strcmp(tabcmd[0], "cd") == 0)
 		serv_cd(tabcmd, clt);
 	else if (ft_strcmp(tabcmd[0], "ls") == 0)
