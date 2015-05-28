@@ -9,13 +9,13 @@ char	*get_csize(char *str)
 
 	if ((fd = open(str, O_RDONLY)) == -1)
 	{
-		printf("ERROR : File cannot be accessed !\n");
+		printf("ERROR : File cannot be accessed.\n");
 		return ("-1");
 	}
 	fstat(fd, &s);
 	if (!(S_ISREG(s.st_mode)))
 	{
-		printf("ERROR : File cannot be accessed !\n");
+		printf("ERROR : File cannot be accessed.\n");
 		return ("-1");
 	}
 	size = s.st_size;
@@ -55,7 +55,7 @@ void	get_serv(char *str, t_serv clt)
 	char	*name;
 
 	name = getiname(str);
-	printf("%s\n", name);
+	printf("File sent : %s.\n", name);
 	size = get_csize(name);
 	write(clt.cs, size, ft_strlen(size));
 	if (ft_strcmp(size, "-1") != 0)

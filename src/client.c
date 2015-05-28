@@ -19,19 +19,29 @@ int		create_client(char *addr, int port)
 	return (clt.sock);
 }
 
+char	*get_addr(char *addr)
+{
+	struct hostent	*h;
+
+	if (!(h = gethostbyname(addr)))
+		return (NULL);
+	return (inet_ntoa(*((struct in_addr *)h->h_addr)));
+}
+
 int		main(int argc, char **argv)
 {
-	t_client	clt;
-	char		*line;
+	t_client			clt;
+	char				*line;
+	char				*addr;
 
 	if (argc != 3)
 		usage_client(argv[0]);
 	clt.port = atoi(argv[2]);
 	printf("port : %d \n", clt.port);
-	if (ft_strcmp(argv[1], "localhost") == 0)
-		clt.sock = create_client("127.0.0.1", clt.port);
-	else
-		clt.sock = create_client(argv[1], clt.port);
+	if ((addr = get_addr(argv[1])) == NULL)
+		usage_client(argv[0]);
+	clt.sock = create_client(addr, clt.port);
+	clt.home = getcwd(NULL, 0);
 	while (1)
 	{
 		ft_putstr("Plait-il ?>");

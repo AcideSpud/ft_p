@@ -1,6 +1,6 @@
 #include <ft_p.h>
 
-char 	*join_string(char **tab)
+char	*join_string(char **tab)
 {
 	char	*s;
 	char	*full;
@@ -11,22 +11,22 @@ char 	*join_string(char **tab)
 	return (full);
 }
 
-char*		get_ssize(char **tab)
+char	*get_ssize(char **tab)
 {
-	struct	stat	s;
+	struct stat		s;
 	int				size;
 	int				fd;
 	char			*it;
 
 	if ((fd = open(tab[1], O_RDONLY)) == -1)
 	{
-		printf("ERROR : file cannot be accessed !\n");
+		printf("ERROR : file cannot be accessed.\n");
 		return ("-1");
 	}
 	fstat(fd, &s);
 	if (!(S_ISREG(s.st_mode)))
 	{
-		printf("ERROR : file cannot be accessed !\n");
+		printf("ERROR : file cannot be accessed.\n");
 		return ("-1");
 	}
 	size = s.st_size;
@@ -36,7 +36,7 @@ char*		get_ssize(char **tab)
 
 void	send_data(t_client clt, char **tab)
 {
-	struct	stat	s;
+	struct stat		s;
 	int				size;
 	int				fd;
 	char			*f;
@@ -56,8 +56,10 @@ void	put_hub(char **tab, t_client clt)
 	st = join_string(tab);
 	write(clt.sock, st, ft_strlen(st));
 	size = get_ssize(tab);
-	printf("%s\n", size);
 	write(clt.sock, size, ft_strlen(size));
 	if (ft_strcmp(size, "-1") != 0)
+	{
 		send_data(clt, tab);
+		printf("SUCCES\n");
+	}
 }

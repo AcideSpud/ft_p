@@ -16,10 +16,10 @@ void	pwd_serv(char **tab, t_serv clt)
 		pwd = getcwd(NULL, 0);
 		ret = ft_strjoin(pwd, "\n");
 		write(clt.cs, ret, ft_strlen(ret));
-		// free(pwd);
-		// pwd = NULL;
-		// free(ret);
-		// ret = NULL;
+		free(pwd);
+		pwd = NULL;
+		free(ret);
+		ret = NULL;
 		return ;
 	}
 }

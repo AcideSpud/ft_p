@@ -13,7 +13,7 @@
 # include <sys/mman.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-# include "../libft/libft.h"
+# include "../libft/includes/libft.h"
 
 typedef struct			s_serv
 {
@@ -33,6 +33,7 @@ typedef	struct			s_client
 	int					sock;
 	struct protoent		*proto;
 	struct sockaddr_in	sin;
+	char				*home;
 }						t_client;
 
 /*

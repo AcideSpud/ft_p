@@ -60,16 +60,16 @@ void	get_hub(char **tab, t_client clt)
 	full = join_istring(tab);
 	write(clt.sock, full, ft_strlen(full));
 	name = getname(tab[1]);
-	printf("recpetion de fichier : %s \n", name);
+	printf("File to reach : %s \n", name);
 	size = get_fsize(clt);
 	if (size == -1)
 	{
-		printf("ERROR : read(get_size)\n");
+		printf("ERROR : File cannot be accessed.\n");
 		return ;
 	}
-	fd = open(name, O_CREAT|O_RDWR, 0777);
+	fd = open(name, O_CREAT | O_RDWR, 0777);
 	get_data(clt, size, fd);
 	close(fd);
-	printf("Sucess\n");
+	printf("SUCCES\n");
 	return ;
 }

@@ -26,7 +26,7 @@ int		exec_client(t_serv clt)
 	if (r > 0)
 	{
 		buf[r] = '\0';
-		printf("receive %d bytes\n Message : %s \n", r, buf);
+		printf("Received %d bytes.\nMessage : %s \n", r, buf);
 		hub_serv(buf, clt);
 	}
 	return (0);
@@ -45,11 +45,29 @@ int		new_client(t_serv clt)
 	return (0);
 }
 
+int		checkargv(int argc, char **argv)
+{
+	int		i;
+
+	if (argc != 2)
+		return (-1);
+	if (ft_strlen(argv[1]) != 4)
+		return (-1);
+	i = 0;
+	while (argv[1][i])
+	{
+		if (argv[1][i] < '0' || argv[1][i] > '9')
+			return (-1);
+		i++;
+	}
+	return (0);
+}
+
 int		main(int argc, char **argv)
 {
 	t_serv	clt;
 
-	if (argc != 2)
+	if (checkargv(argc, argv) == -1)
 		usage_serveur(argv[0]);
 	clt.port = atoi(argv[1]);
 	printf("port : %d \n", clt.port);

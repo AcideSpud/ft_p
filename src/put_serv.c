@@ -46,12 +46,15 @@ void	put_serv(char *str, t_serv clt)
 	char			*name;
 
 	name = getname(str);
-	printf("reception de fichier : %s \n", name);
+	printf("Trying to recieve file : %s \n", name);
 	size = get_fsize(clt);
 	if (size == -1)
+	{
+		printf("ERROR\n");
 		return ;
-	fd = open(name, O_CREAT|O_RDWR, 0777);
+	}
+	fd = open(name, O_CREAT | O_RDWR, 0777);
 	get_fdata(clt, size, fd);
 	close(fd);
-	printf("Sucess\n");
+	printf("SUCCES\n");
 }

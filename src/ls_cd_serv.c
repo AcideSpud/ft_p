@@ -10,6 +10,8 @@ int		check_ls(char **tab)
 			return (0);
 		if (ft_strcmp(tab[1], "-la") == 0)
 			return (0);
+		if (ft_strcmp(tab[1], "-al") == 0)
+			return (0);
 		else
 			return (-1);
 	}
