@@ -46,16 +46,28 @@ void	send_data(t_client clt, char **tab)
 	size = s.st_size;
 	f = (char *)mmap(0, size, PROT_READ, MAP_PRIVATE, fd, 0);
 	write(clt.sock, f, size);
+	close(fd);
 }
 
 void	put_hub(char **tab, t_client clt)
 {
 	char	*st;
 	char	*size;
+	char	buf[4];
+	int		r;
 
 	st = join_string(tab);
 	write(clt.sock, st, ft_strlen(st));
-	size = get_ssize(tab);
+	r = read (clt.sock, buf, 4);
+	if (r == -1)
+	{
+		write(clt.sock, "-1", 2);
+		return ;
+	}
+	if (ft_strcmp(buf, "ok") == 0)
+		size = get_ssize(tab);
+	else
+		size = ft_itoa(-1);
 	write(clt.sock, size, ft_strlen(size));
 	if (ft_strcmp(size, "-1") != 0)
 	{

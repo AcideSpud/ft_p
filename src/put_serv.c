@@ -23,7 +23,7 @@ void	get_fdata(t_serv clt, int size, int fd)
 	char	buf[size];
 
 	r = read(clt.cs, buf, size);
-	if (r > 0)
+	if (r >= 0)
 		write(fd, buf, size);
 }
 
@@ -47,7 +47,9 @@ void	put_serv(char *str, t_serv clt)
 
 	name = getname(str);
 	printf("Trying to recieve file : %s \n", name);
+	write(clt.cs, "ok\0", 3);
 	size = get_fsize(clt);
+	printf("%d\n", size);
 	if (size == -1)
 	{
 		printf("ERROR\n");

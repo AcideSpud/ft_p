@@ -41,7 +41,10 @@ int		new_client(t_serv clt)
 		return (0);
 	else if (!p)
 		while (1)
-			exec_client(clt);
+		{
+			if (exec_client(clt) == 1)
+				exit(1);
+		}
 	return (0);
 }
 
