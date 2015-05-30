@@ -35,6 +35,7 @@ void	send_data(t_serv clt, char *str)
 	size = s.st_size;
 	f = (char *)mmap(0, size, PROT_READ, MAP_PRIVATE, fd, 0);
 	write(clt.cs, f, size);
+	close(fd);
 }
 
 char	*getiname(char *str)
@@ -56,8 +57,19 @@ void	get_serv(char *str, t_serv clt)
 
 	name = getiname(str);
 	printf("File sent : %s.\n", name);
-	size = get_csize(name);
+	size = get_csize(str);
+	if (ft_atoi(size) == -1)
+	{
+		write(clt.cs, "-1", 2);
+		printf("ERROR\n");
+		return ;
+	}
+	printf("debug1\n");
 	write(clt.cs, size, ft_strlen(size));
 	if (ft_strcmp(size, "-1") != 0)
+	{
+		printf("debug2\n");
 		send_data(clt, str);
+		printf("debug3\n");
+	}
 }

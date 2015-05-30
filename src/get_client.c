@@ -7,7 +7,7 @@ int		get_fsize(t_client clt)
 	int		size;
 
 	r = read(clt.sock, buf, 1023);
-	if (r > 0)
+	if (r >= 0)
 	{
 		buf[r] = '\0';
 		size = ft_atoi(buf);
@@ -34,7 +34,7 @@ void	get_data(t_client clt, int size, int fd)
 	char	buf[size];
 
 	r = read(clt.sock, buf, size);
-	if (r > 0)
+	if (r >= 0)
 		write(fd, buf, size);
 }
 
@@ -71,5 +71,4 @@ void	get_hub(char **tab, t_client clt)
 	get_data(clt, size, fd);
 	close(fd);
 	printf("SUCCES\n");
-	return ;
 }

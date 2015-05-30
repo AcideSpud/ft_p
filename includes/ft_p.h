@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_p.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tapostin <tapostin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/05/29 15:05:59 by tapostin          #+#    #+#             */
+/*   Updated: 2015/05/29 15:06:07 by tapostin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_P_H
 # define FT_P_H
 # include <unistd.h>
@@ -56,9 +68,9 @@ int						create_client(char *addr, int port);
 int						create_server(int port);
 /*
 **hub_serv.c
- */
+*/
 void					hub_serv(char *str, t_serv clt);
-void					pwd_serv(char ** tab, t_serv clt);
+void					pwd_serv(char **tab, t_serv clt);
 /*
 **hub_client.c
 */
@@ -87,14 +99,13 @@ void					get_hub(char **str, t_client clt);
 **get_serv.c
 */
 void					get_serv(char *str, t_serv clt);
-
 /*
- **put_serv.c
- */
+**put_serv.c
+*/
 void					put_serv(char *str, t_serv clt);
 /*
- **tool.c
- */
+**tool.c
+*/
 char					*ft_itoa(int n);
 /*
 **ls_cd_serv.c

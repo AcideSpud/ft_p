@@ -3,13 +3,12 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ajulien <ajulien@student.42.fr>            +#+  +:+       +#+         #
+#    By: tapostin <tapostin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2014/11/13 21:13:50 by ajulien           #+#    #+#              #
-#    Updated: 2015/03/16 18:47:41 by ajulien          ###   ########.fr        #
+#    Created: 2015/05/06 19:17:49 by tapostin          #+#    #+#              #
+#    Updated: 2015/05/30 13:30:43 by tapostin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
