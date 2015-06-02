@@ -14,6 +14,7 @@ int		get_fsize(t_client clt)
 	}
 	else
 		size = -1;
+	printf("size file : %d\n", size);
 	return (size);
 }
 
@@ -31,11 +32,19 @@ char	*join_istring(char **tab)
 void	get_data(t_client clt, int size, int fd)
 {
 	int		r;
-	char	buf[size];
+	char	*buf;
+	int		vef;
 
-	r = read(clt.sock, buf, size);
-	if (r >= 0)
-		write(fd, buf, size);
+	vef = 0;
+	buf = (char *)malloc(sizeof(char) * size);
+	while (vef < size)
+	{
+		r = read(clt.sock, buf + vef, size - vef);
+		vef += r;
+	}
+	write(fd, buf, size);
+	free(buf);
+	buf = NULL;
 }
 
 char	*getname(char *str)

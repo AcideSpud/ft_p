@@ -26,15 +26,14 @@ char	*get_csize(char *str)
 void	send_data(t_serv clt, char *str)
 {
 	struct stat		s;
-	int				size;
 	int				fd;
 	char			*f;
 
 	fd = open(str, O_RDONLY);
 	fstat(fd, &s);
-	size = s.st_size;
-	f = (char *)mmap(0, size, PROT_READ, MAP_PRIVATE, fd, 0);
-	write(clt.cs, f, size);
+	f = (char *)mmap(0, s.st_size + 1, PROT_READ,
+						MAP_FILE | MAP_PRIVATE, fd, 0);
+	write(clt.cs, f, s.st_size);
 	close(fd);
 }
 
@@ -64,12 +63,7 @@ void	get_serv(char *str, t_serv clt)
 		printf("ERROR\n");
 		return ;
 	}
-	printf("debug1\n");
 	write(clt.cs, size, ft_strlen(size));
-	if (ft_strcmp(size, "-1") != 0)
-	{
-		printf("debug2\n");
+	if ((ft_strcmp(size, "-1") != 0))
 		send_data(clt, str);
-		printf("debug3\n");
-	}
 }

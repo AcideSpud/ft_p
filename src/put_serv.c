@@ -14,17 +14,26 @@ int		get_fsize(t_serv clt)
 	}
 	else
 		size = -1;
+	printf("%d\n", size);
 	return (size);
 }
 
 void	get_fdata(t_serv clt, int size, int fd)
 {
 	int		r;
-	char	buf[size];
+	char	*buf;
+	int		vef;
 
-	r = read(clt.cs, buf, size);
-	if (r >= 0)
-		write(fd, buf, size);
+	vef = 0;
+	buf = (char *)malloc(sizeof(char) * size);
+	while (vef < size)
+	{
+		r = read(clt.cs, buf + vef, size - vef);
+		vef += r;
+	}
+	write(fd, buf, size);
+	free(buf);
+	buf = NULL;
 }
 
 char	*getname(char *str)
